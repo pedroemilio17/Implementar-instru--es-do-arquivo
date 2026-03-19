@@ -1,4 +1,4 @@
-import { X, Moon, Sun, Bell, Shield, Trash2, User, Palette, Globe } from "lucide-react";
+import { X, Moon, Sun, Bell, Shield, Trash2, User as UserIcon, Palette, Globe } from "lucide-react";
 import { useState } from "react";
 
 interface SettingsModalProps {
@@ -37,12 +37,12 @@ export function SettingsModal({ onClose }: SettingsModalProps) {
               Perfil
             </p>
             <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl">
-              <div className="w-12 h-12 rounded-full bg-indigo-600 flex items-center justify-center">
-                <span className="text-white" style={{ fontSize: "18px", fontWeight: 700 }}>A</span>
+              <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
+                <UserIcon className="w-5 h-5 text-gray-500" />
               </div>
               <div>
-                <p className="text-gray-900" style={{ fontSize: "14px", fontWeight: 600 }}>Ana Lima</p>
-                <p className="text-gray-500" style={{ fontSize: "12px" }}>ana.lima@email.com</p>
+                <p className="text-gray-900" style={{ fontSize: "14px", fontWeight: 600 }}>Estudante</p>
+                <p className="text-gray-500" style={{ fontSize: "12px" }}>Configure seu perfil</p>
               </div>
               <button className="ml-auto px-3 py-1.5 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 transition-all" style={{ fontSize: "12px" }}>
                 Editar

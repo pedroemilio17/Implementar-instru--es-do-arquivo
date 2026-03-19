@@ -1,4 +1,4 @@
-import { Search, Settings, Bell, ChevronDown } from "lucide-react";
+import { Search, Settings, Bell, User } from "lucide-react";
 import { useState } from "react";
 
 interface TopNavProps {
@@ -45,15 +45,13 @@ export function TopNav({ searchQuery, onSearchChange, onOpenSettings }: TopNavPr
 
         <button className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-gray-700 transition-all relative">
           <Bell className="w-4 h-4" />
-          <span className="absolute top-1.5 right-1.5 w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
         </button>
 
-        <button className="flex items-center gap-2 pl-2 pr-3 py-1.5 rounded-lg hover:bg-gray-100 transition-all ml-1">
-          <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0">
-            <span className="text-white" style={{ fontSize: "11px", fontWeight: 600 }}>A</span>
-          </div>
-          <span className="text-gray-700" style={{ fontSize: "13px", fontWeight: 500 }}>Ana Lima</span>
-          <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
+        <button
+          onClick={onOpenSettings}
+          className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-500 hover:bg-gray-200 transition-all ml-1"
+        >
+          <User className="w-4 h-4" />
         </button>
       </div>
     </header>

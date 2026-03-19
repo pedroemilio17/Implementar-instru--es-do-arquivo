@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, StickyNote, Search } from "lucide-react";
+import { BookPlus, StickyNote, Search, ExternalLink, Save } from "lucide-react";
 import { Note, Subject } from "./types";
 import { NoteCard } from "./NoteCard";
 import { NoteModal } from "./NoteModal";
@@ -42,12 +42,16 @@ export function MainArea({
     if (!quickNoteTitle.trim() && !quickNote.trim()) return;
     onAddNote({
       subjectId: selectedSubjectId,
-      title: quickNoteTitle.trim() || "Anotação rápida",
+      title: quickNoteTitle.trim() || "Captura rápida",
       content: quickNote.trim(),
       tags: [],
     });
     setQuickNote("");
     setQuickNoteTitle("");
+  };
+
+  const handleOpenAsNewClass = () => {
+    setShowModal(true);
   };
 
   const title = selectedSubject ? selectedSubject.name : "Todas as anotações";
@@ -84,42 +88,52 @@ export function MainArea({
             className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all shadow-sm shadow-indigo-200"
             style={{ fontSize: "13px", fontWeight: 500 }}
           >
-            <Plus className="w-4 h-4" />
-            Nova anotação
+            <BookPlus className="w-4 h-4" />
+            Nova Aula
           </button>
         </div>
 
-        {/* Quick note input */}
+        {/* Quick capture */}
         <div className="bg-white rounded-xl border border-gray-200 p-4 shadow-sm">
           <input
             type="text"
-            placeholder="Título da anotação..."
+            placeholder="Título..."
             value={quickNoteTitle}
             onChange={(e) => setQuickNoteTitle(e.target.value)}
             className="w-full outline-none text-gray-900 mb-2 placeholder-gray-400"
             style={{ fontSize: "14px", fontWeight: 600 }}
           />
           <textarea
-            placeholder="Comece a escrever sua anotação aqui..."
+            placeholder="Captura rápida — anote algo antes que esqueça..."
             value={quickNote}
             onChange={(e) => setQuickNote(e.target.value)}
-            rows={3}
+            rows={2}
             className="w-full outline-none text-gray-600 resize-none placeholder-gray-400"
             style={{ fontSize: "13px", lineHeight: "1.6" }}
           />
           <div className="flex justify-between items-center pt-3 border-t border-gray-100 mt-2">
             <span className="text-gray-400" style={{ fontSize: "11px" }}>
-              {quickNote.length > 0 ? `${quickNote.length} caracteres` : "Anotação rápida"}
+              {quickNote.length > 0 ? `${quickNote.length} caracteres` : "Captura rápida"}
             </span>
-            <button
-              onClick={handleQuickSave}
-              disabled={!quickNoteTitle.trim() && !quickNote.trim()}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
-              style={{ fontSize: "12px", fontWeight: 500 }}
-            >
-              <Plus className="w-3 h-3" />
-              Salvar
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={handleQuickSave}
+                disabled={!quickNoteTitle.trim() && !quickNote.trim()}
+                className="flex items-center gap-1.5 px-3 py-1.5 border border-gray-200 text-gray-600 rounded-lg hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                style={{ fontSize: "12px", fontWeight: 500 }}
+              >
+                <Save className="w-3 h-3" />
+                Salvar rápido
+              </button>
+              <button
+                onClick={handleOpenAsNewClass}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all"
+                style={{ fontSize: "12px", fontWeight: 500 }}
+              >
+                <ExternalLink className="w-3 h-3" />
+                Abrir em Nova Aula
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -156,7 +170,7 @@ export function MainArea({
               Nenhuma anotação encontrada
             </p>
             <p className="text-gray-400 mt-1" style={{ fontSize: "13px" }}>
-              {searchQuery ? "Tente outro termo de busca" : "Crie sua primeira anotação acima"}
+              {searchQuery ? "Tente outro termo de busca" : "Use a captura rápida ou crie uma Nova Aula"}
             </p>
           </div>
         )}

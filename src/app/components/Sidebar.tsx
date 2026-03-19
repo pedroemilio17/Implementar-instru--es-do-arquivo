@@ -1,4 +1,4 @@
-import { Plus, GraduationCap } from "lucide-react";
+import { Plus, GraduationCap, FolderOpen } from "lucide-react";
 import { Subject } from "./types";
 import { SubjectIcon } from "./SubjectIcon";
 
@@ -56,7 +56,7 @@ export function Sidebar({
 
       {/* Subjects section */}
       <div className="px-3 pt-5 flex-1 overflow-y-auto">
-        <div className="flex items-center justify-between px-3 mb-2">
+        <div className="flex items-center justify-between px-3 mb-3">
           <span
             className="text-gray-400 uppercase tracking-wider"
             style={{ fontSize: "11px", fontWeight: 600 }}
@@ -65,41 +65,61 @@ export function Sidebar({
           </span>
         </div>
 
-        <div className="space-y-0.5">
-          {subjects.map((subject) => {
-            const isActive = selectedSubjectId === subject.id;
-            return (
-              <button
-                key={subject.id}
-                onClick={() => onSelectSubject(subject.id)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
-                  isActive ? "bg-gray-100" : "hover:bg-gray-50"
-                }`}
-              >
-                <div
-                  className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: subject.color + "20", color: subject.color }}
+        {subjects.length > 0 ? (
+          <div className="space-y-1">
+            {subjects.map((subject) => {
+              const isActive = selectedSubjectId === subject.id;
+              return (
+                <button
+                  key={subject.id}
+                  onClick={() => onSelectSubject(subject.id)}
+                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
+                    isActive ? "bg-gray-50" : "hover:bg-gray-50"
+                  }`}
+                  style={{
+                    borderLeft: isActive ? `3px solid ${subject.color}` : "3px solid transparent",
+                  }}
                 >
-                  <SubjectIcon icon={subject.icon} className="w-3.5 h-3.5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <span
-                    className={`block truncate ${isActive ? "text-gray-900" : "text-gray-600"}`}
-                    style={{ fontSize: "13px", fontWeight: isActive ? 600 : 500 }}
+                  <div
+                    className="w-7 h-7 rounded-md flex items-center justify-center flex-shrink-0"
+                    style={{
+                      backgroundColor: subject.color + (isActive ? "25" : "15"),
+                      color: subject.color,
+                    }}
                   >
-                    {subject.name}
+                    <SubjectIcon icon={subject.icon} className="w-3.5 h-3.5" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span
+                      className={`block truncate ${isActive ? "text-gray-900" : "text-gray-600"}`}
+                      style={{ fontSize: "13px", fontWeight: isActive ? 600 : 500 }}
+                    >
+                      {subject.name}
+                    </span>
+                  </div>
+                  <span
+                    className="text-gray-400 flex-shrink-0"
+                    style={{ fontSize: "11px" }}
+                  >
+                    {subject.notesCount}
                   </span>
-                </div>
-                <span
-                  className="text-gray-400 flex-shrink-0"
-                  style={{ fontSize: "11px" }}
-                >
-                  {subject.notesCount}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+                </button>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-8 px-4 text-center">
+            <div className="w-10 h-10 rounded-lg bg-gray-100 flex items-center justify-center mb-2">
+              <FolderOpen className="w-4 h-4 text-gray-300" />
+            </div>
+            <p className="text-gray-400" style={{ fontSize: "12px" }}>
+              Nenhuma matéria
+            </p>
+            <p className="text-gray-400 mt-0.5" style={{ fontSize: "11px" }}>
+              Adicione sua primeira matéria abaixo
+            </p>
+          </div>
+        )}
       </div>
 
       {/* Add subject button */}

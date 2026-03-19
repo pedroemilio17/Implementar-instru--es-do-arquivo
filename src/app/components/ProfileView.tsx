@@ -1,4 +1,4 @@
-import { BookOpen, StickyNote, CheckCircle2, Clock, Settings } from "lucide-react";
+import { BookOpen, StickyNote, CheckCircle2, Clock, Settings, User } from "lucide-react";
 import { Note, Task, Subject } from "./types";
 
 interface ProfileViewProps {
@@ -18,11 +18,11 @@ export function ProfileView({ notes, tasks, subjects, onOpenSettings }: ProfileV
       <div className="bg-gradient-to-br from-indigo-500 to-indigo-700 rounded-2xl p-6 mb-5 text-white">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center">
-            <span className="text-white" style={{ fontSize: "24px", fontWeight: 700 }}>A</span>
+            <User className="w-7 h-7 text-white" />
           </div>
           <div>
-            <h2 style={{ fontSize: "18px", fontWeight: 700 }}>Ana Lima</h2>
-            <p style={{ fontSize: "13px", opacity: 0.8 }}>ana.lima@email.com</p>
+            <h2 style={{ fontSize: "18px", fontWeight: 700 }}>Estudante</h2>
+            <p style={{ fontSize: "13px", opacity: 0.8 }}>Seu perfil</p>
           </div>
         </div>
         <div className="grid grid-cols-3 gap-3">
