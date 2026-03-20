@@ -1,4 +1,5 @@
 import { useState, useCallback } from "react";
+import { WorkspaceSidebar } from "./components/WorkspaceSidebar";
 import { Sidebar } from "./components/Sidebar";
 import { TopNav } from "./components/TopNav";
 import { MainArea } from "./components/MainArea";
@@ -95,9 +96,14 @@ export default function App() {
   };
 
   return (
-    <div className="flex flex-col h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50 w-full">
+      {/* ── GLOBAL WORKSPACE RAIL (lg+) ── */}
+      <div className="hidden lg:block h-full flex-shrink-0 z-20 shadow-xl shadow-slate-900/20 relative">
+        <WorkspaceSidebar tasks={tasks} onOpenSettings={() => setSettingsOpen(true)} />
+      </div>
+
       {/* ── DESKTOP LAYOUT (lg+) ── */}
-      <div className="hidden lg:flex flex-col h-full">
+      <div className="hidden lg:flex flex-col flex-1 h-full min-w-0">
         {/* Top Nav */}
         <TopNav
           searchQuery={searchQuery}
@@ -136,7 +142,7 @@ export default function App() {
       </div>
 
       {/* ── MOBILE LAYOUT (<lg) ── */}
-      <div className="flex lg:hidden flex-col h-full">
+      <div className="flex lg:hidden flex-col h-full w-full flex-1">
         {/* Mobile Header */}
         <MobileHeader
           onOpenDrawer={() => setMobileDrawerOpen(true)}

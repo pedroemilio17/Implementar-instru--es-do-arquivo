@@ -1,0 +1,51 @@
+﻿
+> studyspace-app@0.0.1 build
+> vite build
+
+npm : file:///C:/Users/
+Aluno/OneDrive/CODIGOS/
+AppEstudo/Implementar%2
+0instru%C3%A7%C3%B5es%2
+0do%20arquivo/node_modu
+les/vite/dist/node/chun
+ks/dep-DBxKXgDP.js:4
+No linha:1 caractere:1
++ npm run build > 
+build.log 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~
+    + CategoryInfo     
+         : NotSpecifi  
+  ed: (file:///C:/Us   
+ er...p-DBxKXgDP.js    
+:4:String) [], Rem    
+oteException
+    + FullyQualifiedEr 
+   rorId : NativeComm  
+  andError
+ 
+import fsp, { 
+constants as 
+constants$3 } from 
+'node:fs/promises';
+              ^^^^^^^^^
+SyntaxError: The 
+requested module 
+'node:fs/promises' 
+does not provide an 
+export named 
+'constants'
+    at 
+ModuleJob._instantiate 
+(node:internal/modules/
+esm/module_job:128:21)
+    at async 
+ModuleJob.run (node:int
+ernal/modules/esm/modul
+e_job:194:5)
+    at async 
+Promise.all (index 0)
+    at async 
+ESMLoader.import (node:
+internal/modules/esm/lo
+ader:385:24)
