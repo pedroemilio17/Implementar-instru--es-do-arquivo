@@ -1,0 +1,393 @@
+/* ── Classroom Design System ── */
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+
+:root {
+  --ink: #141210;
+  --ink2: #3a3630;
+  --ink3: #7a746e;
+  --ink4: #b8b2aa;
+  --paper: #faf8f5;
+  --paper2: #f3f0ea;
+  --paper3: #e8e3da;
+  --blue: #2952a3;
+  --blue-l: #eef2fb;
+  --green: #276749;
+  --green-l: #edf5f0;
+}
+
+/* ── Base ── */
+.classroom {
+  font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+}
+
+.classroom * {
+  box-sizing: border-box;
+}
+
+/* ── Typography ── */
+.note-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.body-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink2);
+  line-height: 1.65;
+}
+
+.caption {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: var(--ink3);
+}
+
+.label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ink4);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+/* ── Note Feed Item ── */
+.note-feed-item {
+  padding: 20px 0;
+  border-bottom: 1px solid var(--paper2);
+  transition: background-color 0.15s ease;
+}
+
+.note-feed-item:hover {
+  background-color: var(--paper2);
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 16px;
+  padding-right: 16px;
+  border-radius: 8px;
+}
+
+.note-feed-item:last-child {
+  border-bottom: none;
+}
+
+/* ── Presence Dots Animation ── */
+@keyframes pulse-dot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+.typing-dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+  margin-left: 4px;
+}
+
+.typing-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--blue);
+  animation: pulse-dot 1.4s infinite ease-in-out;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ── Visibility Indicator ── */
+@keyframes pulse-green {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.visibility-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.visibility-dot.public {
+  background-color: var(--green);
+  animation: pulse-green 2s infinite ease-in-out;
+}
+
+.visibility-dot.private {
+  background-color: var(--ink4);
+}
+
+/* ── Command Palette ── */
+.cmd-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: rgba(20, 18, 16, 0.45);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20vh;
+  animation: fade-in 0.12s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.cmd-box {
+  background: white;
+  width: 540px;
+  max-width: 92vw;
+  border-radius: 12px;
+  box-shadow: 0 24px 48px rgba(20, 18, 16, 0.2);
+  overflow: hidden;
+  animation: slide-up 0.15s ease-out;
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cmd-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: none;
+  outline: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  color: var(--ink);
+  background: transparent;
+  border-bottom: 1px solid var(--paper2);
+}
+
+.cmd-input::placeholder {
+  color: var(--ink4);
+}
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink2);
+}
+
+.cmd-item:hover,
+.cmd-item.active {
+  background-color: var(--blue-l);
+  color: var(--blue);
+}
+
+.cmd-item .shortcut {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--ink4);
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Join Room Modal ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(20, 18, 16, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fade-in 0.12s ease-out;
+}
+
+.modal-box {
+  background: white;
+  width: 420px;
+  max-width: 92vw;
+  border-radius: 12px;
+  padding: 32px;
+  box-shadow: 0 24px 48px rgba(20, 18, 16, 0.2);
+  animation: slide-up 0.15s ease-out;
+}
+
+/* ── Like / Save Buttons ── */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 12px;
+  color: var(--ink3);
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.action-btn:hover {
+  background-color: var(--paper2);
+  color: var(--ink2);
+}
+
+.action-btn.active {
+  color: var(--blue);
+}
+
+.action-btn.saved {
+  color: var(--green);
+}
+
+/* ── Room Header ── */
+.room-code {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  background: var(--paper2);
+  border-radius: 6px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink2);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+  letter-spacing: 0.05em;
+}
+
+.room-code:hover {
+  background: var(--paper3);
+}
+
+/* ── Editor ── */
+.note-editor {
+  background: white;
+  border: 1px solid var(--paper3);
+  border-radius: 10px;
+  padding: 24px;
+}
+
+.note-editor textarea {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--ink);
+  background: transparent;
+}
+
+.note-editor textarea::placeholder {
+  color: var(--ink4);
+}
+
+.note-editor-title {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: 'Lora', Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--ink);
+  background: transparent;
+  margin-bottom: 12px;
+}
+
+.note-editor-title::placeholder {
+  color: var(--ink4);
+}
+
+/* ── Toggle Switch ── */
+.toggle-track {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  background: var(--paper3);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  position: relative;
+  border: none;
+  padding: 0;
+}
+
+.toggle-track.on {
+  background: var(--green);
+}
+
+.toggle-knob {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.toggle-track.on .toggle-knob {
+  transform: translateX(16px);
+}
+
+/* ── Online Avatar Stack ── */
+.avatar-stack {
+  display: flex;
+}
+
+.avatar-stack .avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  border: 2px solid var(--paper);
+  margin-left: -6px;
+  flex-shrink: 0;
+}
+
+.avatar-stack .avatar:first-child {
+  margin-left: 0;
+}
+
+/* ── Scrollbar ── */
+.classroom ::-webkit-scrollbar {
+  width: 6px;
+}
+
+.classroom ::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.classroom ::-webkit-scrollbar-thumb {
+  background: var(--paper3);
+  border-radius: 3px;
+}
+
+.classroom ::-webkit-scrollbar-thumb:hover {
+  background: var(--ink4);
+}
